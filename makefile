@@ -1,3 +1,9 @@
+all: lint-check build sure
+
+# Compile and build.
+build:
+	npm run build
+
 # Commit to Git.
 m=[AUTO]
 git:
