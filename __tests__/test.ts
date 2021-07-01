@@ -1,5 +1,5 @@
 import { Epoch } from "../src/epoch";
-import { datePathefier, normalize } from "../src/indexable";
+import { datePathefier, normalize, dateIndexer } from "../src/indexable";
 
 test("Jest test", () => {
   expect(true).toBe(true);
@@ -22,4 +22,10 @@ test("Normalize milliseconds test.", () => {
   console.log(normalize(date.toString()));
 
   expect(normalize(test.toString()) === ans.toString()).toBe(true);
+});
+
+test("Date indexer test", () => {
+  const test = 1625109749836;
+  const ar1 = dateIndexer(test, 1);
+  console.log(ar1);
 });

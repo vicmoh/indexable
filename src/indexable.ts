@@ -1,4 +1,4 @@
-//import { Epoch } from "./epoch";
+import { Epoch } from "./epoch";
 //import { DateIndex } from "./models/date-index";
 import "./string.extension";
 
@@ -11,17 +11,42 @@ export class Indexable {
   //  time(mil: number): DateIndex {
   //    const curDate: number = Date.now();
   //  }
-  //  /**
-  //   * @param mil the time to be indexed.
-  //   * @param days range that will indexed.
-  //   */
-  //  private dayIndexer(mil: number, days: number) {
-  //    const cur = mil;
-  //  }
 }
 
 /**
- * Replace the character of a string.
+ * Create a single index array
+ * of possible dates for the indexing.
+ * For example if the [mil] date
+ * is 20/1/5 (y/m/d) and [numDays]
+ * is set as 3 days.
+ *
+ * The index will be an array dates
+ * ranging from 20/1/2 to 20/1/8.
+ *
+ * @param mil is the date to be index
+ * in milliseconds epoch.
+ * @param numDays between the date.
+ * @return Array of the range dates indexed.
+ */
+export function dateIndexer(mil: number, numDays: number): Array<number> {
+  const dates: Array<number> = [];
+  dates.push(parseInt(normalize(mil.toString())));
+
+  let preDate = mil;
+  let posDate = mil;
+  for (let x = 0; x < numDays; x++) {
+    preDate = preDate - Epoch.oneDay();
+    posDate = posDate + Epoch.oneDay();
+    dates.push(parseInt(normalize(preDate.toString())));
+    dates.push(parseInt(normalize(posDate.toString())));
+  }
+
+  return dates;
+}
+
+/**
+ * Replace the character of a string
+ * with another character.
  * @param str string of a certain
  * character to be replaced.
  * @param index of the string where the
@@ -35,10 +60,14 @@ function repCharAt(str: string, index: number, rep: string) {
 }
 
 /**
- * Normalize the milliseconds.
+ * Normalize the milliseconds to day.
  * For Example turning.
  *
- * 1 day is 86400000. There are 5 zeros
+ * 1 day is 86400000 in millisecond epoch.
+ *
+ * It will set 5 zeros at the end of milliseconds.
+ * To set the date.
+ *
  * at the end.
  * @param mil string in milliseconds format.
  */
@@ -52,14 +81,6 @@ export function normalize(mil: string) {
   }
   return temp;
 }
-
-/**
- * @param mil the time to be indexed.
- * @param days range that will indexed.
- */
-//function dayIndexer(mil: number, days: number): Array<number> {
-//  const cur = mil;
-//}
 
 /**
  * @param mil in millisecond epoch.
