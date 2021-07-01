@@ -1,6 +1,10 @@
 import { Epoch } from "./epoch";
 import { IndexableDate } from "./models/indexable-date";
 
+/**
+ * Instance for indexing content for
+ * database queries.
+ */
 export class Indexable {
   /**
    * Create a time based index up to 3 months.
