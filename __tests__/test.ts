@@ -1,5 +1,10 @@
 import { Epoch } from "../src/epoch";
-import { datePathefier, normalize, dateIndexer } from "../src/indexable";
+import {
+  datePathefier,
+  normalize,
+  dateIndexer,
+  Indexable,
+} from "../src/indexable";
 
 test("Jest test", () => {
   expect(true).toBe(true);
@@ -40,4 +45,8 @@ test("Date indexer test", () => {
     }
   }
   expect(res).toBe(true);
+});
+
+test("Indexable test.", () => {
+  console.log(new Indexable().dates(Date.now()));
 });
