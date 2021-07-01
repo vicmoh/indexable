@@ -1,0 +1,29 @@
+{
+  "name": "indexable",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicmoh/indexable.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vicmoh/indexable/issues"
+  },
+  "homepage": "https://github.com/vicmoh/indexable#readme",
+  "description": ""
+}
