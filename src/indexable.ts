@@ -1,6 +1,5 @@
 import { Epoch } from "./epoch";
 //import { DateIndex } from "./models/date-index";
-import "./string.extension";
 
 export class Indexable {
   /**
@@ -32,12 +31,9 @@ export function dateIndexer(mil: number, numDays: number): Array<number> {
   const dates: Array<number> = [];
   dates.push(parseInt(normalize(mil.toString())));
 
-  let preDate = mil;
   let posDate = mil;
   for (let x = 0; x < numDays; x++) {
-    preDate = preDate - Epoch.oneDay();
     posDate = posDate + Epoch.oneDay();
-    dates.push(parseInt(normalize(preDate.toString())));
     dates.push(parseInt(normalize(posDate.toString())));
   }
 

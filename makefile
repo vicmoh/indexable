@@ -6,7 +6,7 @@ build:
 
 # Commit to Git.
 m=[AUTO]
-git:
+git: all
 	git add -A
 	git commit -m '$(m)'
 	git push
