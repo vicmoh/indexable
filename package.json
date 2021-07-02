@@ -2,7 +2,10 @@
   "name": "indexable",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/ngeohash": "^0.6.2",
+    "ngeohash": "^0.6.3"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "jest": "^27.0.6",

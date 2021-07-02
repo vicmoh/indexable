@@ -1,10 +1,6 @@
+import { dateIndexer, datePathefier, normalize } from "../src/date-indexer";
 import { Epoch } from "../src/epoch";
-import {
-  datePathefier,
-  normalize,
-  dateIndexer,
-  Indexable,
-} from "../src/indexable";
+import { Indexable } from "../src/indexable";
 
 test("Jest test", () => {
   expect(true).toBe(true);
