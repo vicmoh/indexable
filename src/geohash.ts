@@ -1,5 +1,5 @@
 import * as _geohash from "ngeohash";
-import { isEmpty } from "./is-empty";
+import { isEmpty } from "../packages/ts-util/src/is-empty";
 
 /**
  * The geo hash index model.
@@ -37,6 +37,37 @@ export interface GeoPrecision {
 }
 
 /**
+ * This is used for indexing
+ * the geo neighbours in one area
+ * for querying purposes.
+ *
+ * Each neighbour precision consist
+ * of a list of hashes including
+ * the bounding box of the coordinate.
+ */
+export interface GeoNeighbours {
+  np1: Array<string>;
+  np2: Array<string>;
+  np3: Array<string>;
+  np4: Array<string>;
+  np5: Array<string>;
+  np6: Array<string>;
+
+  /*
+   * 7, 8, and 9 precision will be null.
+   * This is because we don't want to give
+   * user the pinpoint exactly where they are
+   * for privacy and security reason.
+   *
+   * secureGIndex will make sure that p7, p8 and p9 will be null.
+   * These should be null when saving to the database.
+   */
+  np7: Array<string> | null;
+  np8?: Array<string> | null;
+  np9?: Array<string> | null;
+}
+
+/**
  * This makes sure that it will not be
  * high precision index.
  * @param index
@@ -59,8 +90,25 @@ export class Geohash {
    * The list starts of the top neighbours of the box
    * and runs clockwise until top left box.
    */
-  public neighbors(hash: string): Array<String> {
+  neighbors(hash: string): Array<String> {
+    if (isEmpty(hash)) return [];
     return _geohash.neighbors(hash);
+  }
+
+  hashIndexNeighbours(
+    lat: number,
+    lon: number,
+    options?: { showHighPrecision: boolean }
+  ): GeoNeighbours {
+    const gn: any = {};
+    const hash = this.hashIndex(lat, lon, options) as any;
+    for (let x = 1; x <= 9; x++) {
+      const curHash = hash[`p${x}`] as string;
+      const neighbours = this.neighbors(curHash);
+      neighbours.push(curHash);
+      gn["np" + x.toString()] = neighbours;
+    }
+    return gn as GeoNeighbours;
   }
 
   /**
@@ -74,7 +122,7 @@ export class Geohash {
    *  .
    * }
    */
-  public hashIndex(
+  hashIndex(
     lat: number,
     lon: number,
     options?: {
@@ -103,10 +151,5 @@ export class Geohash {
 
     if (showHighPrecision) return index as GeoPrecision;
     else return useLowPrecision(index as GeoPrecision);
-  }
-
-  test() {
-    console.log(this.hashIndex(43.6532, -79.3832));
-    console.log(this.hashIndex(43.6532, -79.3832, { showHighPrecision: true }));
   }
 }

@@ -1,4 +1,8 @@
-all: lint-check build sure
+all: package-pull lint-check build sure
+
+# Git pull the submodule packages.
+package-pull:
+	git submodule update --recursive --remote
 
 # Compile and build.
 build:

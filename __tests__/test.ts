@@ -1,5 +1,9 @@
 import { dateIndexer, datePathefier, normalize } from "../src/date-indexer";
 import { Indexable } from "../src/indexable";
+import { Log } from "../packages/ts-util/src/log";
+
+const log = new Log({ disable: true });
+const SHOW_LOG = true;
 
 test("Jest test", () => {
   expect(true).toBe(true);
@@ -17,6 +21,7 @@ test("normalise() should normalize the time to the current day.", () => {
 });
 
 test("dateIndexer() should create the correct dates of the index list", () => {
+  const func = "dateIndexer";
   const test = 1625109749836;
   const ans = [
     1625109700000, //
@@ -27,7 +32,7 @@ test("dateIndexer() should create the correct dates of the index list", () => {
     1625541700000,
   ];
   const ar1 = dateIndexer(test, 5);
-  console.log(ar1);
+  log.print(func, ar1);
 
   let res = true;
   for (const each of ar1) {
@@ -40,5 +45,7 @@ test("dateIndexer() should create the correct dates of the index list", () => {
 });
 
 test("Log output test.", () => {
-  console.log(new Indexable().dates(Date.now()));
+  const i = new Indexable().dates(Date.now());
+  if (SHOW_LOG) console.log(i);
+  log.print(null, i);
 });
