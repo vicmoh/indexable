@@ -1,4 +1,4 @@
-import { dateIndexer, IndexableDate } from "./date-indexer";
+import { dateIndexer, IndexableDate, datePathefier } from "./date-indexer";
 
 /**
  * Instance for indexing content for
@@ -14,7 +14,7 @@ export class Indexable {
   dates(mil: number): IndexableDate {
     const cur = mil;
     const index: IndexableDate = {
-      currentDate: cur,
+      currentDate: datePathefier(cur),
       day1: dateIndexer(cur, 1),
       day2: dateIndexer(cur, 2),
       day3: dateIndexer(cur, 3),

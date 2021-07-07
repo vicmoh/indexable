@@ -4,15 +4,15 @@ import { Epoch } from "./epoch";
  * Interface for possible index.
  */
 export interface IndexableDate {
-  currentDate: number;
-  day1: Array<number>;
-  day2: Array<number>;
-  day3: Array<number>;
-  day5: Array<number>;
-  week1: Array<number>;
-  week2: Array<number>;
-  month1: Array<number>;
-  month3: Array<number>;
+  currentDate: string;
+  day1: Array<string>;
+  day2: Array<string>;
+  day3: Array<string>;
+  day5: Array<string>;
+  week1: Array<string>;
+  week2: Array<string>;
+  month1: Array<string>;
+  month3: Array<string>;
 }
 
 /**
@@ -30,14 +30,14 @@ export interface IndexableDate {
  * @param numDays between the date.
  * @return Array of the range dates indexed.
  */
-export function dateIndexer(mil: number, numDays: number): Array<number> {
-  const dates: Array<number> = [];
-  dates.push(parseInt(normalize(mil.toString())));
+export function dateIndexer(mil: number, numDays: number): Array<string> {
+  const dates: Array<string> = [];
+  dates.push(datePathefier(mil));
 
   let posDate = mil;
   for (let x = 0; x < numDays; x++) {
     posDate = posDate + Epoch.oneDay();
-    dates.push(parseInt(normalize(posDate.toString())));
+    dates.push(datePathefier(posDate));
   }
 
   return dates;
@@ -54,31 +54,8 @@ export function dateIndexer(mil: number, numDays: number): Array<number> {
  * the is placed based on the index.
  * @return string where character has been changed.
  */
-function repCharAt(str: string, index: number, rep: string) {
+export function repCharAt(str: string, index: number, rep: string) {
   return str.substr(0, index) + rep + str.substr(index + rep.length);
-}
-
-/**
- * Normalize the milliseconds to day.
- * For Example turning.
- *
- * 1 day is 86400000 in millisecond epoch.
- *
- * It will set 5 zeros at the end of milliseconds.
- * To set the date.
- *
- * at the end.
- * @param mil string in milliseconds format.
- */
-export function normalize(mil: string) {
-  let temp = mil;
-  let count = 0;
-  for (let x = temp.length - 1; x > 0; x--) {
-    temp = repCharAt(temp, x, "0");
-    count++;
-    if (count >= 5) break;
-  }
-  return temp;
 }
 
 /**

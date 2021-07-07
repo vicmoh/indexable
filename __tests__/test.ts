@@ -1,4 +1,4 @@
-import { dateIndexer, datePathefier, normalize } from "../src/date-indexer";
+import { dateIndexer, datePathefier } from "../src/date-indexer";
 import { Indexable } from "../src/indexable";
 import { Log } from "../packages/ts-util/src/log";
 
@@ -14,25 +14,20 @@ test("datePathefier() should create the correct format.", () => {
   expect(datePathefier(date) === "2021-7-1").toBe(true);
 });
 
-test("normalise() should normalize the time to the current day.", () => {
-  const test = 1625109749836;
-  const ans = 1625109700000;
-  expect(normalize(test.toString()) === ans.toString()).toBe(true);
-});
-
 test("dateIndexer() should create the correct dates of the index list", () => {
   const func = "dateIndexer";
-  const test = 1625109749836;
+  const test = new Date(1625109749836);
   const ans = [
-    1625109700000, //
-    1625196100000,
-    1625282500000,
-    1625368900000,
-    1625455300000,
-    1625541700000,
+    "2021-7-1",
+    "2021-7-2",
+    "2021-7-3",
+    "2021-7-4",
+    "2021-7-5",
+    "2021-7-6",
   ];
-  const ar1 = dateIndexer(test, 5);
-  log.print(func, ar1);
+
+  const ar1 = dateIndexer(test.getTime(), 5);
+  console.log(func, ar1);
 
   let res = true;
   for (const each of ar1) {
