@@ -44,21 +44,6 @@ export function dateIndexer(mil: number, numDays: number): Array<string> {
 }
 
 /**
- * Replace the character of a string
- * with another character.
- * @param str string of a certain
- * character to be replaced.
- * @param index of the string where the
- * character will be replaced.
- * @param rep is the new character string
- * the is placed based on the index.
- * @return string where character has been changed.
- */
-export function repCharAt(str: string, index: number, rep: string) {
-  return str.substr(0, index) + rep + str.substr(index + rep.length);
-}
-
-/**
  * @param mil in millisecond epoch.
  */
 export function datePathefier(mil: number): string {

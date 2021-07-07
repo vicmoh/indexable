@@ -2,6 +2,7 @@ all: package-pull lint-check build sure
 
 # Git pull the submodule packages.
 package-pull:
+	git pull --recurse-submodule
 	git submodule update --recursive --remote
 
 # Compile and build.
