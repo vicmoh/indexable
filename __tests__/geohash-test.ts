@@ -14,5 +14,5 @@ test("Testing count from 1 to 9", () => {
 
 test("hashIndexNeighbours() should create the correct indexes.", () => {
   const t1 = new Geohash();
-  console.log(t1.hashIndexNeighbours(43.5448, -80.2482));
+  console.log(t1.hashIndexNeighbors(43.5448, -80.2482));
 });

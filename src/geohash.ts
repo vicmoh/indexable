@@ -28,7 +28,7 @@ export interface GeoPrecision {
    * user the pinpoint exactly where they are
    * for privacy and security reason.
    *
-   * secureGIndex will make sure that p7, p8 and p9 will be null.
+   * useLowPrecision() will make sure that p7, p8 and p9 will be null.
    * These should be null when saving to the database.
    */
   p7: string | null;
@@ -95,7 +95,7 @@ export class Geohash {
     return _geohash.neighbors(hash);
   }
 
-  hashIndexNeighbours(
+  hashIndexNeighbors(
     lat: number,
     lon: number,
     options?: { showHighPrecision: boolean }
@@ -115,7 +115,7 @@ export class Geohash {
    * Create a hash index precision.
    * @throws string error message if lat
    * or lon parameter is not defined.
-   * @return GIndex {
+   * @return GeoPrecision {
    *  <precision number> : <geohash string>
    *  .
    *  .

@@ -1,10 +1,19 @@
 import { dateIndexer, IndexableDate, datePathefier } from "./date-indexer";
+import { Geohash } from "./geohash";
 
 /**
  * Instance for indexing content for
  * database queries.
  */
 export class Indexable {
+  /**
+   * Get geohash instances containing
+   * indexing functions for geo.
+   */
+  geo(): Geohash {
+    return new Geohash();
+  }
+
   /**
    * Create a time based index up to 3 months.
    * @param mil time in millisecond epoch.
