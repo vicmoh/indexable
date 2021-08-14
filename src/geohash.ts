@@ -1,6 +1,8 @@
 import * as _geohash from "ngeohash";
 import { isEmpty } from "../packages/ts-util/src/is-empty";
 
+const debug = false;
+
 /**
  * The geo hash index model.
  * This is used for the indexing
@@ -129,7 +131,6 @@ export class Geohash {
       showHighPrecision: boolean;
     }
   ): GeoPrecision {
-    const debug = false;
     const showHighPrecision = options?.showHighPrecision ?? false;
 
     if (isEmpty(lat) || isEmpty(lon))
