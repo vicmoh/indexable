@@ -1,4 +1,5 @@
 import { dateIndexer, IndexableDate, datePathefier } from "./date-indexer";
+import { TextIndexer } from "./text-indexer";
 import { Geohash } from "./geohash";
 
 /**
@@ -12,6 +13,16 @@ export class Indexable {
    */
   geo(): Geohash {
     return new Geohash();
+  }
+
+  /**
+   * Get word indexer instances
+   * containing indexing functions
+   * for phrases, words etc. to
+   * be able to search based on text.
+   */
+  text(): TextIndexer {
+    return new TextIndexer();
   }
 
   /**

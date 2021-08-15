@@ -1,7 +1,7 @@
-import { WordIndexer } from "../src/word-indexer";
+import { TextIndexer } from "../src/text-indexer";
 
 const DEBUG = false;
-const _w = new WordIndexer();
+const _w = new TextIndexer();
 
 describe("Testing word indexer", () => {
   const sen = "This sentence is going to be indexed.";
@@ -14,7 +14,7 @@ describe("Testing word indexer", () => {
 
   test("indexStartWord(): Should create index of search start string.", () => {
     const res = new Set(["T", "Th", "Thi", "This"]);
-    expect(_w.indexStartWord(testWord)).toEqual(res);
+    expect(_w.indexStartText(testWord)).toEqual(res);
   });
 
   test("indexSubWord(): Should create index of possible sub string.", () => {
@@ -30,8 +30,8 @@ describe("Testing word indexer", () => {
       "is",
       "s",
     ]);
-    if (DEBUG) console.log(_w.indexSubWord(testWord));
-    expect(_w.indexSubWord(testWord)).toEqual(res);
+    if (DEBUG) console.log(_w.indexSubText(testWord));
+    expect(_w.indexSubText(testWord)).toEqual(res);
   });
 
   test("index(): Should create search index instances.", () => {
