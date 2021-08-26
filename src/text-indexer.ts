@@ -6,6 +6,20 @@ export interface SearchIndex {
   sub: Set<string>;
 }
 
+export interface SearchIndexList {
+  word: Array<string>;
+  start: Array<string>;
+  sub: Array<string>;
+}
+
+export function parseSearchIndex(val: SearchIndex): SearchIndexList {
+  return {
+    word: Array.from(val?.word ?? new Set()),
+    start: Array.from(val?.start ?? new Set()),
+    sub: Array.from(val?.sub ?? new Set()),
+  };
+}
+
 export class TextIndexer {
   eachWordIn = (val: string) =>
     val
