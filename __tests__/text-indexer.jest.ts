@@ -119,6 +119,7 @@ describe("Testing word indexer", () => {
     const ind = _w.index(sen);
     expect(ind.sub).toEqual(res);
     expect(_w.index(sen));
+    expect(ind.full).toEqual(null);
     if (DEBUG) console.log(_w.index(sen));
   });
 });

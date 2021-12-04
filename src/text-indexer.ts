@@ -4,6 +4,7 @@ export interface SearchIndex {
   word: Set<string>;
   start: Set<string>;
   sub: Set<string>;
+  full: Set<string> | null;
 }
 
 export interface SearchIndexList {
@@ -44,7 +45,16 @@ export class TextIndexer {
     return list;
   };
 
-  index(para: string): SearchIndex {
+  /**
+   * Index the paragraph of the text.
+   * @param {string} para - The paragraph of text to index.
+   * @param {boolean} options.isFullSubstring - if true, index the full substring of the word.
+   * This options is very expensive. Only use it if you know what you are doing
+   * or if you are sure that the text is not too long.
+   *
+   * @returns {SearchIndex} - The index query of the text.
+   */
+  index(para: string, options?: { isFullSubstring?: boolean }): SearchIndex {
     const eachWord = this.eachWordIn(para);
 
     if (debug) console.log(eachWord);
@@ -57,10 +67,18 @@ export class TextIndexer {
       sumStart = new Set([...sumStart, ...this.indexStartText(e)]);
       sumSub = new Set([...sumSub, ...this.indexSubText(e)]);
     }
-    return {
+
+    // Create a the search index object
+    //
+    // If this string allow full string sub indexing as
+    // as the option add to the search index.
+    const si: SearchIndex = {
       word: new Set<string>(eachWord),
       start: sumStart,
       sub: sumSub,
+      full: options?.isFullSubstring ? this.indexSubText(para) : null, // Very expensive in space.
     };
+
+    return si;
   }
 }
