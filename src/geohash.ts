@@ -88,11 +88,11 @@ export function useLowPrecision(index: GeoPrecision) {
 export class Geohash {
   /**
    * Get hash neighbour excluding the hash provided.
-   * @return Array<String> of the list of hash neighbours.
+   * @return Array<string> of the list of hash neighbours.
    * The list starts of the top neighbours of the box
    * and runs clockwise until top left box.
    */
-  neighbors(hash: string): Array<String> {
+  neighbors(hash: string): Array<string> {
     if (isEmpty(hash)) return [];
     return _geohash.neighbors(hash);
   }
